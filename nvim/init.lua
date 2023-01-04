@@ -1,0 +1,5 @@
+require('rafaelledo.base')
+require('rafaelledo.highlights')
+require('rafaelledo.maps')
+require('rafaelledo.plugins')
+require('rafaelledo.windows')
