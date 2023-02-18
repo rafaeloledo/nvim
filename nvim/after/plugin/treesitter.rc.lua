@@ -12,7 +12,7 @@ ts.setup {
   },
   ensure_installed = {
     "markdown",
-    "markdown_inline"
+    "markdown_inline",
     "tsx",
     "toml",
     "fish",
