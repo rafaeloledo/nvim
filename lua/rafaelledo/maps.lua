@@ -42,3 +42,7 @@ keymap.set('i', '<S-h>', '<Left>')
 keymap.set('i', '<S-j>', '<Down>')
 keymap.set('i', '<S-k>', '<Up>')
 keymap.set('i', '<S-l>', '<Right>')
+
+-- Indenting remaps
+keymap.set('v', '<TAB>', '>gv')
+keymap.set('v', '<S-TAB>', '<gv')
