@@ -21,6 +21,8 @@ lualine.setup {
       { 'diagnostics', sources = { "nvim_diagnostic" }, symbols = { error = ' ', warn = ' ', info = ' ',
         hint = ' ' } },
       'filesize',
+      'searchcount',
+      'progress',
       'encoding',
       'filetype'
     },
