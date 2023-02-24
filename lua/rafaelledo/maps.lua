@@ -38,10 +38,10 @@ keymap.set('n', '<C-w><up>', '<C-w>+')
 keymap.set('n', '<C-w><down>', '<C-w>-')
 
 -- Directional keys remap
-keymap.set('i', '<S-h>', '<Left>')
-keymap.set('i', '<S-j>', '<Down>')
-keymap.set('i', '<S-k>', '<Up>')
-keymap.set('i', '<S-l>', '<Right>')
+keymap.set('i', '<A-h>', '<Left>')
+keymap.set('i', '<A-j>', '<Down>')
+keymap.set('i', '<A-k>', '<Up>')
+keymap.set('i', '<A-l>', '<Right>')
 
 -- Indenting remaps
 keymap.set('v', '<TAB>', '>gv')
