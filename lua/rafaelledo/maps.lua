@@ -15,9 +15,9 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 -- Save with root permission (not working for now)
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
-keymap.set('n', 'te', ':tabedit', { silent = true }) -- New Tab
-keymap.set('n', 'tc', ':tabclose', { silent = true }) -- Close Tab
-keymap.set('n', 'tn', ':tabnext', { silent = true }) -- Next tab
+keymap.set('n', 'te', ':tabedit', { silent = true })     -- New Tab
+keymap.set('n', 'tc', ':tabclose', { silent = true })    -- Close Tab
+keymap.set('n', 'tn', ':tabnext', { silent = true })     -- Next tab
 keymap.set('n', 'tp', ':tabprevious', { silent = true }) -- Previous tab
 
 -- Split window
@@ -46,3 +46,6 @@ keymap.set('i', '<A-l>', '<Right>')
 -- Indenting remaps
 keymap.set('v', '<TAB>', '>gv')
 keymap.set('v', '<S-TAB>', '<gv')
+
+-- vscode-like remappings
+keymap.set('n', '<C-A-d>', 'dd')
