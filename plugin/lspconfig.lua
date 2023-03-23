@@ -75,10 +75,11 @@ nvim_lsp.flow.setup {
 nvim_lsp.tsserver.setup {
 }
 
-nvim_lsp.sourcekit.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
+-- only for macos
+-- nvim_lsp.sourcekit.setup {
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+-- }
 
 nvim_lsp.clangd.setup {
 
