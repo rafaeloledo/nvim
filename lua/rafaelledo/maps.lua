@@ -1,6 +1,6 @@
 local keymap = vim.keymap
 
-keymap.set('n', 'x', '"_x')
+keymap.set('n', 'x', '"_x') -- no overwrite system clipboard
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
