@@ -48,4 +48,5 @@ keymap.set('v', '<TAB>', '>gv')
 keymap.set('v', '<S-TAB>', '<gv')
 
 -- vscode-like remappings
-keymap.set('n', '<C-A-d>', 'dd')
+-- keymap.set('n', '<C-A-d>', 'dd')
+-- keymap.set('n', '<C-BS>', 'dw')
