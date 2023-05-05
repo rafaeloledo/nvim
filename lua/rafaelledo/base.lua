@@ -20,7 +20,8 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
-vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+-- Case insensitive searching UNLESS /C or capital in search
+vim.opt.ignorecase = true 
 vim.opt.smarttab = true
 vim.opt.breakindent = true
 vim.opt.shiftwidth = 2
@@ -43,3 +44,9 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
+
+vim.opt.termguicolors = true
+vim.opt.scrolloff = 8
+vim.opt.colorcolumn = "80"
+vim.g.mapleader = " "
+
