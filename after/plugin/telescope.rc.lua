@@ -24,16 +24,16 @@ telescope.setup {
       hijack_netrw = true,
       mappings = {
         -- your custom insert mode mappings
-        --["i"] = {
-        --  ["<C-w>"] = function() vim.cmd('normal vbd') end,
-        --},
+        ["i"] = {
+          ["<C-w>"] = function() vim.cmd('normal vbd') end,
+        },
         ["n"] = {
           -- your custom normal mode mappings
           ["N"] = fb_actions.create,
           ["h"] = fb_actions.goto_parent_dir,
-          --["/"] = function()
-          -- vim.cmd('startinsert')
-          --end
+          ["/"] = function()
+            vim.cmd('startinsert')
+          end
         },
       },
     },
@@ -49,21 +49,27 @@ vim.keymap.set('n', ';f',
       hidden = true
     })
   end)
+
 vim.keymap.set('n', ';r', function()
   builtin.live_grep()
 end)
+
 vim.keymap.set('n', '\\\\', function()
   builtin.buffers()
 end)
+
 vim.keymap.set('n', ';t', function()
   builtin.help_tags()
 end)
+
 vim.keymap.set('n', ';;', function()
   builtin.resume()
 end)
+
 vim.keymap.set('n', ';e', function()
   builtin.diagnostics()
 end)
+
 vim.keymap.set("n", "sf", function()
   telescope.extensions.file_browser.file_browser({
     path = "%:p:h",
@@ -73,6 +79,6 @@ vim.keymap.set("n", "sf", function()
     grouped = true,
     previewer = true,
     initial_mode = "normal",
-    layout_config = { height = 13 }
+    layout_config = { height = 24 }
   })
 end)
