@@ -44,11 +44,10 @@ telescope.load_extension("file_browser")
 
 vim.keymap.set('n', ';f',
   function()
-    builtin.git_files()
-    --builtin.find_files({
-    --  no_ignore = false,
-    --  hidden = true
-    --})
+    builtin.find_files({
+      no_ignore = false,
+      hidden = true
+    })
   end)
 
 vim.keymap.set('n', ';r', function()
