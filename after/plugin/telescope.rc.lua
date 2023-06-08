@@ -12,6 +12,7 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 telescope.setup {
   extensions = {
     file_browser = {
+      hijack_netrw = true,
       mappings = {
         ["i"] = {
           ["<C-w>"] = function() vim.cmd('normal vbd') end,
