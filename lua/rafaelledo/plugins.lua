@@ -29,7 +29,6 @@ require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
   use 'norcalli/nvim-colorizer.lua'
-  use 'folke/zen-mode.nvim'
   use({
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
@@ -46,4 +45,5 @@ require('packer').startup(function(use)
       vim.cmd('colorscheme rose-pine')
     end
   })
+  use 'folke/zen-mode.nvim'
 end)
