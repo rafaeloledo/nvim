@@ -30,44 +30,46 @@ telescope.setup {
 }
 
 telescope.load_extension("file_browser")
-local keymap = vim.keymap
-keymap.set('n', ';f',
-  function()
-    builtin.find_files({
-      no_ignore = false,
-      hidden = true
-    })
-  end)
 
-keymap.set('n', ';r', function()
+local keymap = vim.keymap
+
+keymap.set('n', '<leader>pf', function()
+  builtin.find_files({
+    no_ignore = false,
+    hidden = true
+  })
+end)
+
+keymap.set('n', '<leader>ps', function()
   builtin.live_grep()
 end)
 
-keymap.set('n', '\\\\', function()
-  builtin.buffers()
-end)
-
-keymap.set('n', ';t', function()
+keymap.set('n', '<leader>vh', function()
   builtin.help_tags()
 end)
 
-keymap.set('n', ';;', function()
-  builtin.resume()
-end)
+-- keymap.set('n', '\\\\', function()
+--  builtin.buffers()
+-- end)
 
-keymap.set('n', ';e', function()
-  builtin.diagnostics()
-end)
 
-keymap.set("n", "sf", function()
-  telescope.extensions.file_browser.file_browser({
-    path = "%:p:h",
-    cwd = telescope_buffer_dir(),
-    respect_gitignore = false,
-    hidden = true,
-    grouped = true,
-    previewer = true,
-    initial_mode = "normal",
-    layout_config = { height = 24 }
-  })
-end)
+-- keymap.set('n', ';;', function()
+--  builtin.resume()
+-- end)
+
+-- keymap.set('n', ';e', function()
+--  builtin.diagnostics()
+-- end)
+
+-- keymap.set("n", "sf", function()
+--  telescope.extensions.file_browser.file_browser({
+--    path = "%:p:h",
+--    cwd = telescope_buffer_dir(),
+--    respect_gitignore = false,
+--    hidden = true,
+--    grouped = true,
+--    previewer = true,
+--    initial_mode = "normal",
+--    layout_config = { height = 28 }
+--  })
+--end)
