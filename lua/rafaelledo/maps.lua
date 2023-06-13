@@ -1,19 +1,28 @@
 local keymap = vim.keymap
 
-keymap.set('n', 'x', '"_x') -- no overwrite system clipboard
+keymap.set('n', '<leader>pv', vim.cmd.Ex)
+keymap.set({'n', 'v'}, '<leader>y', [["+y]])
+keymap.set({'n', 'v'}, '<leader>Y', [["+Y]])
+keymap.set({'n', 'v'}, '<leader>d', [["_d]])
+keymap.set('i', '<C-c>', '<Esc>')
+keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
+keymap.set('n', '<leader><leader>', function ()
+  vim.cmd("so")
+end)
+keymap.set('n', '<leader>f', vim.lsp.buf.format)
+-- Search with cursor in middle
+keymap.set('n', 'n', 'nzzzv')
+keymap.set('n', 'N', 'Nzzzv')
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
 
 -- Delete a word backwards
-keymap.set('n', 'dw', 'vb"_d')
+keymap.set('n', 'db', 'vb"_d')
 
 -- Select all
 keymap.set('n', '<C-a>', 'gg<S-v>G')
-
--- Save with root permission (not working for now)
---vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
 -- New tab
 keymap.set('n', 'te', ':tabedit')
@@ -50,9 +59,3 @@ keymap.set('n', 'J', "mzJ`z")
 keymap.set('n', '<C-d>', '<C-d>zz')
 keymap.set('n', '<C-u>', '<C-u>zz')
 
--- Search with cursor in middle
-keymap.set('n', 'n', 'nzzzv')
-keymap.set('n', 'N', 'Nzzzv')
-
--- nha
-keymap.set('i', '<C-c>', '<Esc>')
