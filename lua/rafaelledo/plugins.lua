@@ -2,9 +2,10 @@ vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use {'nvim-telescope/telescope.nvim', requires = {
-    {'nvim-lua/plenary.nvim'}
-  }}
+
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-lua/plenary.nvim'
+
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -30,12 +31,12 @@ require('packer').startup(function(use)
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
   
-  use("nvim-treesitter/playground")
-  use("theprimeagen/harpoon")
-  use("theprimeagen/refactoring.nvim")
-  use("mbbill/undotree")
-  use("tpope/vim-fugitive")
-  use("nvim-treesitter/nvim-treesitter-context");
+  use 'nvim-treesitter/playground'
+  use 'theprimeagen/harpoon'
+  use 'theprimeagen/refactoring.nvim'
+  use 'mbbill/undotree'
+  use 'tpope/vim-fugitive'
+  use 'nvim-treesitter/nvim-treesitter-context'
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -57,6 +58,7 @@ require('packer').startup(function(use)
 		  -- Snippets
 		  {'L3MON4D3/LuaSnip'},
 		  {'rafamadriz/friendly-snippets'},
+    }
   }
 
   use 'folke/zen-mode.nvim'
