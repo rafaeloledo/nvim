@@ -11,7 +11,6 @@ ts.setup {
     disable = {},
   },
   ensure_installed = {
-    "python",
     "markdown",
     "markdown_inline",
     "tsx",

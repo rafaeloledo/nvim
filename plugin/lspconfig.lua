@@ -85,10 +85,6 @@ nvim_lsp.clangd.setup {
 
 }
 
-nvim_lsp.pyright.setup {
-
-}
-
 nvim_lsp.lua_ls.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)
