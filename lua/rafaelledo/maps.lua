@@ -1,9 +1,5 @@
 local keymap = vim.keymap
 
---- ThePrimeagen modified
-
-vim.g.mapleader = " "
-
 keymap.set('n', '<leader>pv', vim.cmd.Ex)
 keymap.set({'n', 'v'}, '<leader>y', [["+y]])
 keymap.set({'n', 'v'}, '<leader>Y', [["+Y]])
@@ -17,8 +13,6 @@ keymap.set('n', '<leader>f', vim.lsp.buf.format)
 -- Search with cursor in middle
 keymap.set('n', 'n', 'nzzzv')
 keymap.set('n', 'N', 'Nzzzv')
-
---- devaslife modified
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
