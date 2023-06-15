@@ -12,17 +12,11 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 telescope.setup {
   extensions = {
     file_browser = {
+      theme = "dropdown",
       hijack_netrw = true,
       mappings = {
         ["i"] = {
           ["<C-w>"] = function() vim.cmd('normal vbd') end,
-        },
-        ["n"] = {
-          ["N"] = fb_actions.create,
-          ["h"] = fb_actions.goto_parent_dir,
-          ["/"] = function()
-            vim.cmd('startinsert')
-          end
         },
       },
     },
