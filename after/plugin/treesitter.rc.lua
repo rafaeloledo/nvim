@@ -21,6 +21,8 @@ ts.setup {
     "yaml",
     "swift",
     "css",
+    "rust",
+    "c",
     "html",
     "lua"
   },

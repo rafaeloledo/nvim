@@ -2,10 +2,15 @@ local status, lspkind = pcall(require, "lspkind")
 if (not status) then return end
 
 lspkind.init({
-  -- enables text annotations
+  -- DEPRECATED (use mode instead): enables text annotations
   --
   -- default: true
-  mode = 'symbol',
+  -- with_text = true,
+
+  -- defines how annotations are shown
+  -- default: symbol
+  -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+  mode = 'symbol_text',
 
   -- default symbol map
   -- can be either 'default' (requires nerd-fonts font) or
@@ -18,30 +23,30 @@ lspkind.init({
   --
   -- default: {}
   symbol_map = {
-    Text = "󰦨",
-    Method = "",
-    Function = "󰡱",
-    Constructor = "",
-    Field = "",
-    Variable = "",
-    Class = "",
+    Text = "󰉿",
+    Method = "󰆧",
+    Function = "󰊕",
+    Constructor = "",
+    Field = "󰜢",
+    Variable = "󰀫",
+    Class = "󰠱",
     Interface = "",
-    Module = "",
+    Module = "",
     Property = "󰜢",
     Unit = "󰑭",
-    Value = "",
-    Enum = "",
+    Value = "󰎠",
+    Enum = "",
     Keyword = "󰌋",
     Snippet = "",
     Color = "󰏘",
     File = "󰈙",
-    Reference = "",
+    Reference = "󰈇",
     Folder = "󰉋",
-    EnumMember = "󰖽",
+    EnumMember = "",
     Constant = "󰏿",
-    Struct = "",
+    Struct = "󰙅",
     Event = "",
-    Operator = "󱓉",
-    TypeParameter = ""
+    Operator = "󰆕",
+    TypeParameter = "",
   },
 })
