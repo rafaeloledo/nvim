@@ -59,3 +59,5 @@ keymap.set('n', 'N', 'Nzzzv')
 
 -- nha
 keymap.set('i', '<C-c>', '<Esc>')
+
+vim.keymap.set("n", "<C-f>", vim.lsp.buf.format)
