@@ -28,6 +28,7 @@ telescope.setup {
         ["n"] = {
           ["n"] = fb_actions.create,
           ["p"] = fb_actions.goto_parent_dir,
+          ["h"] = fb_actions.goto_cwd,
           ["/"] = function()
             vim.cmd('startinsert')
           end
@@ -39,13 +40,7 @@ telescope.setup {
 
 telescope.load_extension("file_browser")
 local keymap = vim.keymap
-keymap.set('n', ';f',
-  function()
-    builtin.find_files({
-      no_ignore = false,
-      hidden = true
-    })
-  end)
+keymap.set('n', ';f', builtin.git_files)
 
 keymap.set('n', ';r', function()
   builtin.live_grep()
