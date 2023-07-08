@@ -5,6 +5,9 @@ keymap.set('n', 'd', '"_d')
 keymap.set('n', 'y', 'vy')
 keymap.set('n', '.', '<nop>')
 
+keymap.set('v', 'd', '"_d')
+keymap.set('v', '<Del>', '"_d')
+
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
