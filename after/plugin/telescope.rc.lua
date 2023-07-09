@@ -19,8 +19,10 @@ telescope.setup {
   },
   extensions = {
     file_browser = {
-      theme = "dropdown",
+      hidden = true,
       hijack_netrw = true,
+      respect_gitignore = false,
+      initial_mode = "normal",
       mappings = {
         ["i"] = {
           ["<C-w>"] = function() vim.cmd('normal vbd') end,
