@@ -1,5 +1,7 @@
 local keymap = vim.keymap
 
+keymap.set('n', ';uf', ':w<Return>:e ++ff=dos<Return>:set ff=unix<Return>')
+
 keymap.set('n', 'x', '"_x') -- no overwrite system clipboard
 keymap.set('n', 'd', '"_d')
 keymap.set('n', 'y', 'vy')
@@ -22,7 +24,7 @@ keymap.set('n', '<C-a>', 'gg<S-v>G')
 --vim.api.nvim_create_user_command('W', 'w !sudo tee > /dev/null %', {})
 
 -- New tab
-keymap.set('n', 'te', ':tabedit')
+keymap.set('n', 'te', ':tabedit<Return>')
 
 -- Split window
 keymap.set('n', 'ss', ':split<Return><C-w>w')
