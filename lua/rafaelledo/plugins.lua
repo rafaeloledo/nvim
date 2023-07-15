@@ -16,6 +16,7 @@ require('packer').startup(function(use)
   use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
+
   use 'glepnir/lspsaga.nvim' -- LSP UIs
   use 'L3MON4D3/LuaSnip'
   use {
@@ -40,17 +41,5 @@ require('packer').startup(function(use)
   use { 'nvim-orgmode/orgmode', config = function()
     require('orgmode').setup {}
   end
-  }
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      vim.o.timeout = false
-      vim.o.timeoutlen = 0
-      require("which-key").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
-    end
   }
 end)

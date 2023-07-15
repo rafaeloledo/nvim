@@ -7,5 +7,5 @@ if is_win then require('rafaelledo.windows') end
 
 require('rafaelledo.base')
 require('rafaelledo.highlights')
-require('rafaelledo.plugins')
 require('rafaelledo.maps')
+require('rafaelledo.plugins')
