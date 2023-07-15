@@ -37,10 +37,19 @@ vim.opt.swapfile = false
 -- vim.cmd([[let &t_Cs = "\e[4:3m"]])
 --vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
+-- autocmd
+
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
   command = "set nopaste"
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = 'highlight Comment cterm=none gui=none'
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = ':silent! %s/\r/',
 })
 
 -- Add asterisks in block comments

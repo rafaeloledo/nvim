@@ -4,4 +4,8 @@ if (not status) then return end
 zenMode.setup {
 }
 
-vim.keymap.set('n', '<C-w>o', '<cmd>ZenMode<cr>', { silent = true })
+local wk = require("which-key")
+
+wk.register({
+  ["<C-w>o"] = { "<cmd>ZenMode<cr>", "Zen Mode" }
+})

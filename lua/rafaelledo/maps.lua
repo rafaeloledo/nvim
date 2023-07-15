@@ -1,6 +1,5 @@
 local keymap = vim.keymap
-
-keymap.set('n', ';uf', ':w<Return>:e ++ff=dos<Return>:set ff=unix<Return>')
+local wk = require("which-key")
 
 keymap.set('n', 'x', '"_x') -- no overwrite system clipboard
 keymap.set('n', 'd', '"_d')
@@ -9,6 +8,7 @@ keymap.set('n', '.', '<nop>')
 
 keymap.set('v', 'd', '"_d')
 keymap.set('v', '<Del>', '"_d')
+keymap.set('i', '<C-z>', '<Esc>u')
 
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
@@ -28,21 +28,22 @@ keymap.set('n', 'te', ':tabedit<Return>')
 keymap.set('n', 'q', ':tabclose<Return>')
 
 -- Split window
-keymap.set('n', 'ss', ':split<Return><C-w>w')
-keymap.set('n', 'sv', ':vsplit<Return><C-w>w')
+wk.register({
+  ["ss"] = { ":split<Return><C-w>w", "Horizontal Split" },
+  ["sv"] = { ":vsplit<Return><C-w>w", "Vertical Split" },
+  -- Move window
+  ["sh"] = { "<C-w>h", "Move Window to Left" },
+  ["sk"] = { "<C-w>h", "Move Window Up" },
+  ["sj"] = { "<C-w>h", "Move Window Down" },
+  ["sl"] = { "<C-w>h", "Move Window to Right" },
+  -- Resize window
+  ["<C-w><left>"] = { "<C-w><", "Reduce width" },
+  ["<C-w><up>"] = { "<C-w>+", "Increase height" },
+  ["<C-w><down>"] = { "<C-w>-", "Reduce height" },
+  ["<C-w><right>"] = { "<C-w>>", "Reduce width" }
+})
 
--- Move window
-keymap.set('n', '<Space>', '<C-w>w')
-keymap.set('', 'sh', '<C-w>h')
-keymap.set('', 'sk', '<C-w>k')
-keymap.set('', 'sj', '<C-w>j')
-keymap.set('', 'sl', '<C-w>l')
-
--- Resize window
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+keymap.set('n', '<C-w><', '<nop>')
 
 -- Indenting remaps
 keymap.set('v', '<TAB>', '>gv')
@@ -66,4 +67,4 @@ keymap.set('n', 'N', 'Nzzzv')
 -- nha
 keymap.set('i', '<C-c>', '<Esc>')
 
-vim.keymap.set("n", "<C-f>", vim.lsp.buf.format)
+keymap.set("n", "<C-f>", vim.lsp.buf.format)
