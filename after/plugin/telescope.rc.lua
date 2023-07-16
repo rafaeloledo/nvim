@@ -22,6 +22,7 @@ telescope.setup {
       hidden = true,
       hijack_netrw = true,
       respect_gitignore = false,
+      theme = "dropdown",
       initial_mode = "normal",
       mappings = {
         ["i"] = {
