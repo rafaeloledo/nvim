@@ -1,3 +1,5 @@
+-- https://github.com/neovim/nvim-lspconfig
+
 --vim.lsp.set_log_level("debug")
 
 local status, nvim_lsp = pcall(require, "lspconfig")

@@ -1,3 +1,5 @@
+-- https://github.com/nvim-orgmode/orgmode
+
 -- Load custom treesitter grammar for org filetype
 local orgmode = require('orgmode')
 

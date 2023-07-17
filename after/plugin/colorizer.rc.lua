@@ -1,6 +1,8 @@
- local status, colorizer = pcall(require, "colorizer")
- if (not status) then return end
+-- https://github.com/norcalli/nvim-colorizer.lua
 
- colorizer.setup({
-   '*';
- })
+local status, colorizer = pcall(require, "colorizer")
+if (not status) then return end
+
+colorizer.setup({
+  '*',
+})

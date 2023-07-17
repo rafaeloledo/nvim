@@ -1,3 +1,5 @@
+-- https://github.com/dinhhuy258/git.nvim
+
 local status, git = pcall(require, "git")
 if (not status) then return end
 

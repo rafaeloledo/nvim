@@ -1,3 +1,5 @@
+-- https://github.com/folke/zen-mode.nvim
+
 local status, zenMode = pcall(require, "zen-mode")
 if (not status) then return end
 

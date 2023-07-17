@@ -43,6 +43,10 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   command = "set nopaste"
 })
 
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = ':silent! %s/\r/',
+})
+
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
 
@@ -50,3 +54,6 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 8
 -- vim.opt.colorcolumn = "80"
 vim.g.mapleader = " "
+vim.api.nvim_command('set fillchars=eob:\\ ')
+vim.wo.signcolumn = "yes"
+--vim.o.showmode = false

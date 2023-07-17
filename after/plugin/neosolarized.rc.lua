@@ -1,3 +1,5 @@
+-- https://github.com/svrana/neosolarized.nvim
+
 local status, n = pcall(require, "neosolarized")
 if (not status) then return end
 
