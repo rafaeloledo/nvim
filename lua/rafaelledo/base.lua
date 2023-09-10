@@ -47,6 +47,11 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   command = ':silent! %s/\r/',
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.inc",
+  command = ':set ft=asm'
+})
+
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
 
