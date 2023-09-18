@@ -52,6 +52,11 @@ vim.api.nvim_create_autocmd("BufEnter", {
   command = ':set ft=asm'
 })
 
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = { "*.rasi", "*.jsonc", "*.css" },
+  command = 'echo ""'
+})
+
 -- Add asterisks in block comments
 vim.opt.formatoptions:append { 'r' }
 

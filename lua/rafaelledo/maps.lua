@@ -1,8 +1,8 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-keymap.set('n', 'x', '"_x', opts) -- no overwrite system clipboard
-keymap.set('n', 'd', '"_d', opts)
+keymap.set({ 'n', 'v' }, 'x', '"_x', opts) -- no overwrite system clipboard
+keymap.set({ 'n', 'v' }, 'd', '"_d', opts)
 keymap.set('n', 'y', 'vy', opts)
 keymap.set('n', '.', '<nop>', opts)
 
