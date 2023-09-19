@@ -7,6 +7,9 @@ keymap.set({ 'n', 'v', 'x' }, '<kDel>', '"_d') -- Key Pad Delete
 keymap.set('n', 'y', 'vy')
 keymap.set('n', '.', '<nop>')
 
+-- Prevent creating a new line before pasting
+keymap.set({ 'n', 'v', 'x' }, 'p', 'P')
+
 -- Increment/decrement
 keymap.set('n', '+', '<C-a>')
 keymap.set('n', '-', '<C-x>')
