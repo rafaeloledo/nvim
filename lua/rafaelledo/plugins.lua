@@ -6,6 +6,7 @@ require('packer').startup(function(use)
     'svrana/neosolarized.nvim',
     requires = { 'tjdevries/colorbuddy.nvim' }
   }
+  use({ 'rose-pine/neovim', as = 'rose-pine' })
   use 'nvim-lualine/lualine.nvim'       -- Statusline
   use 'nvim-lua/plenary.nvim'           -- Common utilities
   use 'onsails/lspkind-nvim'            -- vscode-like pictograms
@@ -46,10 +47,5 @@ require('packer').startup(function(use)
   }
   -- Icons
   use 'kyazdani42/nvim-web-devicons' -- File icons
-  -- File explorer
-  use 'nvim-tree/nvim-tree.lua'
-  -- Terminal inside vim
-  use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-    require("toggleterm").setup()
-  end }
+  use 'numToStr/Comment.nvim'
 end)

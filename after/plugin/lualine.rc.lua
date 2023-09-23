@@ -28,6 +28,7 @@ lualine.setup {
           hint = ' '
         }
       },
+      'filesize',
       'encoding',
     },
     lualine_y = { '' }, -- Progress

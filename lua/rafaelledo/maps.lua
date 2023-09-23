@@ -61,10 +61,10 @@ keymap.set('n', 'n', 'nzzzv')
 keymap.set('n', 'N', 'Nzzzv')
 
 keymap.set('i', '<C-c>', '<Esc>')
-keymap.set("n", "<C-f>", vim.lsp.buf.format)
+keymap.set("n", "<S-f>", vim.lsp.buf.format)
 keymap.set('n', 'ec', ':e ~/.config/nvim<Return>')
 keymap.set('n', '<leader>r', ':w<Return>:so<Return>')
-keymap.set('n', '<leader>e', function()
+keymap.set('n', '<C-b>', function()
   if vim.api.nvim_buf_get_option(0, 'filetype') == 'NvimTree' then
     vim.cmd('NvimTreeClose')
   else

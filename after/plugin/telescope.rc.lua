@@ -58,7 +58,7 @@ local keymap = vim.keymap
 keymap.set('n', ';f', function()
   builtin.find_files({
     no_ignore = false,
-    hidden = true
+    hidden = false
   })
 end)
 
