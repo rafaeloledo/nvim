@@ -9,3 +9,5 @@ require('rafaelledo.base')
 require('rafaelledo.highlights')
 require('rafaelledo.maps')
 require('rafaelledo.plugins')
+
+vim.cmd [[highlight Cursor guibg=white guifg=black]]

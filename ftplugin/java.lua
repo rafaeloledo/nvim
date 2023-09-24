@@ -25,7 +25,7 @@ local config = {
     bundles = {}
   },
 }
-require('jdtls').start_or_attach(config)
-require('lspconfig').jdtls.setup {
 
-}
+require('jdtls').start_or_attach(config)
+
+require('lspconfig').jdtls.setup {}
