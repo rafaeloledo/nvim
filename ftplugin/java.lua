@@ -27,5 +27,3 @@ local config = {
 }
 
 require('jdtls').start_or_attach(config)
-
-require('lspconfig').jdtls.setup {}
