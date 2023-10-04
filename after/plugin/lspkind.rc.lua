@@ -25,7 +25,7 @@ lspkind.init({
   --
   -- default: {}
   symbol_map = {
-    Text = "󰉿 [Text]",
+    Text = "󰉿 (Text)",
     Method = "󰆧 [Method]",
     Function = "󰊕 [Function]",
     Constructor = " [Constructor]",

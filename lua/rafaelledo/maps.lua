@@ -62,7 +62,7 @@ keymap.set('n', 'N', 'Nzzzv')
 
 keymap.set('i', '<C-c>', '<Esc>')
 keymap.set("n", "<S-f>", vim.lsp.buf.format)
-keymap.set('n', 'ec', ':e ~/.config/nvim<Return>')
+keymap.set('n', '<leader>ec', ':e ~/.config/nvim<Return>')
 keymap.set('n', '<leader>r', ':w<Return>:so<Return>')
 keymap.set('n', '<C-b>', function()
   vim.cmd('NvimTreeToggle')
