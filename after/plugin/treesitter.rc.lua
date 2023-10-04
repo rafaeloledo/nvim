@@ -21,6 +21,7 @@ ts.setup {
     "markdown_inline",
     "kotlin",
     "tsx",
+    "javascript",
     "toml",
     "fish",
     "php",
