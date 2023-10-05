@@ -24,11 +24,12 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-nvim-lua'
   use 'L3MON4D3/LuaSnip'
 
-  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a language server to inject LSP diagnostics, code actions, and more via Lua
+  use 'jose-elias-alvarez/null-ls.nvim' -- Use Neovim as a LSP to inject diagnostics, code actions,
+  -- and more via Lua
 
-  use 'nvimdev/lspsaga.nvim'            -- LSP UIs
+  use 'nvimdev/lspsaga.nvim' -- LSP UIs
 
-  use 'dinhhuy258/git.nvim'             -- For git blame & browse
+  use 'dinhhuy258/git.nvim'  -- For git blame & browse
 
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
