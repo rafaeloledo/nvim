@@ -1,3 +1,4 @@
 scoop
 pack/
 packer_compiled.lua
+lazy-lock.json
