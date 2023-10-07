@@ -1,5 +1,3 @@
--- https://github.com/hrsh7th/nvim-cmp
-
 local status, cmp = pcall(require, "cmp")
 if (not status) then return end
 local lspkind = require 'lspkind'

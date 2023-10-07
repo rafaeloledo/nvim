@@ -40,6 +40,7 @@ keymap.set('n', 'N', 'Nzzzv')
 
 keymap.set("n", "<S-f>", vim.lsp.buf.format)
 keymap.set('n', '<C-z>', 'u')
+
 keymap.set('v', '<TAB>', '>gv')
 keymap.set('v', '<S-TAB>', '<gv')
 
@@ -48,8 +49,3 @@ keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 keymap.set('i', '<C-z>', '<Esc>u')
 keymap.set('i', '<C-c>', '<Esc>')
-
-keymap.set('n', '<C-b>', function()
-  vim.cmd('NvimTreeToggle')
-end)
-

@@ -1,5 +1,3 @@
--- https://github.com/folke/lsp-colors.nvim
-
 local status, colors = pcall(require, "lsp-colors")
 if (not status) then return end
 
