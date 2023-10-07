@@ -2,9 +2,7 @@ vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  -- use({ 'rose-pine/neovim', as = 'rose-pine' })
   use 'nvim-telescope/telescope.nvim'
-  use { 'nvim-telescope/telescope-fzf-native.nvim', build = "make" }
   use 'nvim-lua/plenary.nvim' -- Common utilities
 
   use {
@@ -17,6 +15,10 @@ require('packer').startup(function(use)
   use 'williamboman/mason-lspconfig.nvim'
   use 'mfussenegger/nvim-jdtls'
 
+  use {
+    'svrana/neosolarized.nvim',
+    requires = { 'tjdevries/colorbuddy.nvim' }
+  }
   use 'hrsh7th/nvim-cmp'     -- Completion
   use 'hrsh7th/cmp-buffer'   -- nvim-cmp source for buffer words
   use 'hrsh7th/cmp-path'
@@ -34,10 +36,6 @@ require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
 
-  use {
-    'svrana/neosolarized.nvim',
-    requires = { 'tjdevries/colorbuddy.nvim' }
-  }
   use 'onsails/lspkind-nvim'      -- vscode-like pictograms
   use 'norcalli/nvim-colorizer.lua'
   use 'nvim-lualine/lualine.nvim' -- Statusline
