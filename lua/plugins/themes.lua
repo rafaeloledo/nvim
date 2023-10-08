@@ -10,7 +10,7 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        enabled = false,
+        enabled = true,
         config = function()
             vim.cmd('colorscheme catppuccin')
         end

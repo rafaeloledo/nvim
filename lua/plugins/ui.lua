@@ -1,4 +1,10 @@
 return {
+    {
+        "rcarriga/nvim-notify",
+        init = function()
+            vim.notify = require("notify")
+        end,
+    },
     { "onsails/lspkind-nvim" },
     {
         "norcalli/nvim-colorizer.lua",
@@ -148,4 +154,93 @@ return {
         end
     },
     { "nvim-tree/nvim-web-devicons" },
+    {
+        "stevearc/dressing.nvim",
+        lazy = true,
+        init = function()
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.select = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.select(...)
+            end
+            ---@diagnostic disable-next-line: duplicate-set-field
+            vim.ui.input = function(...)
+                require("lazy").load({ plugins = { "dressing.nvim" } })
+                return vim.ui.input(...)
+            end
+        end,
+    },
+
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+        end,
+        opts = {
+            defaults = {
+                mode = { 'n', 'v'},
+                [";f"] = "Find files",
+                ["sf"] = "Git files",
+                ["ss"] = "Split",
+                [";r"] = "Live grep",
+                [";d"] = "Go to definition",
+                ["<leader>w"] = "Cycle window/buffer",
+                ["<leader>h"] = "Cycle left",
+                ["<leader>j"] = "Cycle down",
+                ["<leader>k"] = "Cycle up / prefix (key)",
+                ["<leader>km"] = "Keymaps",
+                ["<leader>l"] = "Cycle right",
+                ["gl"] = "Show line diagnostics",
+                ["K"] = "Hover doc",
+                ["gd"] = "Finder",
+                ["gt"] = "Go to type definition",
+                ["gp"] = "Peek definition",
+                ["gr"] = "Rename",
+                ["<leader>ca"] = "Code actions",
+                ["<leader>c"] = "Code",
+            }
+        },
+        config = function (_, opts)
+            local wk = require("which-key")
+            wk.setup(opts)
+            wk.register(opts.defaults)
+        end
+    },
+
+    {
+        "folke/noice.nvim",
+        event = "VeryLazy",
+        opts = {
+          lsp = {
+            override = {
+              ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+              ["vim.lsp.util.stylize_markdown"] = true,
+              ["cmp.entry.get_documentation"] = true,
+            },
+          },
+          routes = {
+            {
+              filter = {
+                event = "msg_show",
+                any = {
+                  { find = "%d+L, %d+B" },
+                  { find = "; after #%d+" },
+                  { find = "; before #%d+" },
+                },
+              },
+              view = "mini",
+            },
+          },
+          presets = {
+            bottom_search = true,
+            command_palette = true,
+            long_message_to_split = true,
+            inc_rename = true,
+          },
+        },
+    },
+
+    { "MunifTanjim/nui.nvim", lazy = true },
 }
