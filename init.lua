@@ -1,4 +1,2 @@
-require('rafaelledo.base')
-require('rafaelledo.highlights')
-require('rafaelledo.maps')
-require('rafaelledo.lazy')
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
