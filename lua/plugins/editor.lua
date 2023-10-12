@@ -50,27 +50,30 @@ return {
       telescope.setup {
         defaults = {
           layout_config = {
-            height = 44,
-            preview_width = 101,
-            width = 180,
+            height = 55,
+            preview_width = 120,
+            width = 200,
           },
         }
       }
 
       local builtin = require("telescope.builtin")
 
-      local keymap = vim.keymap
+      -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
+      local set = vim.keymap.set
 
-      keymap.set('n', '<leader>km', function()
+      set('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
+      set('n', '<leader>gc', '<cmd>Telescope git_commits<CR>')
+      set('n', '<leader>km', function()
         builtin.keymaps()
       end)
-      keymap.set('n', ';f', builtin.find_files, {
+      set('n', ';f', builtin.find_files, {
 
       })
-      keymap.set('n', ';r', function()
+      set('n', ';r', function()
         builtin.live_grep()
       end)
-      keymap.set("n", "sf", builtin.git_files, {})
+      set("n", "sf", builtin.git_files, {})
     end,
   },
   { 'nvim-lua/plenary.nvim' },

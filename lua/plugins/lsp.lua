@@ -5,28 +5,15 @@ return {
       local status, nvim_lsp = pcall(require, "lspconfig")
       if (not status) then return end
 
-      local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
-
-      -- Use an on_attach function to only map the following keys
-      -- after the language server attaches to the current buffer
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
-        --Enable completion triggered by <c-x><c-o>
-        --local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-        --buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-        -- Mappings.
         local opts = { noremap = true, silent = true }
 
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
         buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-        --buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
         buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-        --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
       end
 
-      -- Set up completion using nvim_cmp with LSP source
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
       nvim_lsp.flow.setup {
@@ -42,12 +29,6 @@ return {
         cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities
       }
-
-      -- only for macos
-      -- nvim_lsp.sourcekit.setup {
-      --   on_attach = on_attach,
-      --   capabilities = capabilities,
-      -- }
 
       nvim_lsp.clangd.setup {}
 
@@ -75,11 +56,6 @@ return {
         },
       }
 
-      --nvim_lsp.tailwindcss.setup {
-      --  on_attach = on_attach,
-      --  capabilities = capabilities
-      --}
-
       nvim_lsp.cssls.setup {
         on_attach = on_attach,
         capabilities = capabilities
@@ -101,7 +77,6 @@ return {
         }
       )
 
-      -- Diagnostic symbols in the sign column (gutter)
       local signs = { Error = "", Warn = " ", Hint = "", Info = " " }
       for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
@@ -114,7 +89,7 @@ return {
         },
         update_in_insert = true,
         float = {
-          source = "always",           -- Or "if_many"
+          source = "always", -- Or "if_many"
         },
       })
     end,
@@ -225,26 +200,8 @@ return {
       if (not status) then return end
 
       lspkind.init({
-        -- DEPRECATED (use mode instead): enables text annotations
-        --
-        -- default: true
-        -- with_text = true,
-
-        -- defines how annotations are shown
-        -- default: symbol
-        -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
         mode = 'symbol_text',
-
-        -- default symbol map
-        -- can be either 'default' (requires nerd-fonts font) or
-        -- 'codicons' for codicon preset (requires vscode-codicons font)
-        --
-        -- default: 'default'
         preset = 'codicons',
-
-        -- override preset symbols
-        --
-        -- default: {}
         symbol_map = {
           Text = "󰉿 (Text)",
           Method = "󰆧 (Method)",
@@ -285,7 +242,7 @@ return {
         highlight = {
           enable = true,
           disable = function(lang, buf)
-            local max_filesize = 100 * 1024             -- 100 KB
+            local max_filesize = 100 * 1024 -- 100 KB
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
               return true
@@ -330,6 +287,41 @@ return {
   },
   { 'williamboman/mason.nvim' },
   { 'williamboman/mason-lspconfig.nvim' },
-  { 'mfussenegger/nvim-jdtls' },
+  {
+    'mfussenegger/nvim-jdtls',
+    config = function()
+      local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+
+      local jar_path = '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+
+      local config = {
+        cmd = {
+          'java',
+          '-Declipse.application=org.eclipse.jdt.ls.core.id1',
+          '-Dosgi.bundles.defaultStartLevel=4',
+          '-Declipse.product=org.eclipse.jdt.ls.core.product',
+          '-Dlog.protocol=true',
+          '-Dlog.level=ALL',
+          '-Xms1g',
+          '--add-modules=ALL-SYSTEM',
+          '--add-opens', 'java.base/java.util=ALL-UNNAMED',
+          '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
+          '-jar', jar_path,
+          '-configuration', '/usr/share/java/jdtls/config_linux',
+          '-data', vim.fn.expand('~/.cache/jdtls-workspace') .. workspace_dir,
+        },
+        root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
+        settings = {
+          java = {
+          }
+        },
+        init_options = {
+          bundles = {}
+        },
+      }
+
+      require('jdtls').start_or_attach(config)
+    end
+  },
   { 'nvimtools/none-ls.nvim' },
 }

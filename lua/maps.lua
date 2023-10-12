@@ -1,51 +1,54 @@
-local keymap = vim.keymap
+local set = vim.keymap.set
 
-keymap.set({ 'n', 'v', 'x' }, 'x', '"_x')
-keymap.set({ 'n', 'v', 'x' }, 'd', '"_d')
-keymap.set({ 'n', 'v', 'x' }, '<Delete>', '"_d')
-keymap.set({ 'n', 'v', 'x' }, 'p', 'P')
+set({ 'n', 'v', 'x' }, 'x', '"_x')
+set({ 'n', 'v', 'x' }, 'd', '"_d')
+set({ 'n', 'v', 'x' }, '<Delete>', '"_d')
+set({ 'n', 'v', 'x' }, 'p', 'P')
 
-keymap.set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>') -- Key Pad Delete
-keymap.set('i', '<kDel>', '<Delete>')
+set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>') -- Key Pad Delete
+set('i', '<kDel>', '<Delete>')
 
-keymap.set('n', 'y', 'vy')
-keymap.set('n', '.', '<nop>')
+set('n', 'y', 'vy')
+set('n', '.', '<nop>')
 
-keymap.set('n', '+', '<C-a>')
-keymap.set('n', '-', '<C-x>')
+set('n', '+', '<C-a>')
+set('n', '-', '<C-x>')
 
-keymap.set('n', 'dw', 'vb"_d')
-keymap.set('n', '<C-a>', 'gg<S-v>G')
+set('n', 'dw', 'vb"_d')
+set('n', '<C-a>', 'gg<S-v>G')
 
-keymap.set('n', 'te', ':tabedit<Return>')
-keymap.set('n', 'ss', ':vsplit<Return><C-w>w')
+set('n', 'H', '^')
+set('n', 'L', '$')
 
-keymap.set('n', '<leader>w', '<C-w>w')
-keymap.set('n', '<leader>h', '<C-w>h')
-keymap.set('n', '<leader>k', '<C-w>k')
-keymap.set('n', '<leader>j', '<C-w>j')
-keymap.set('n', '<leader>l', '<C-w>l')
+set('n', 'te', ':tabedit<Return>')
+set('n', 'ss', ':vsplit<Return><C-w>w')
 
-keymap.set('n', '<C-w><left>', '<C-w><')
-keymap.set('n', '<C-w><right>', '<C-w>>')
-keymap.set('n', '<C-w><up>', '<C-w>+')
-keymap.set('n', '<C-w><down>', '<C-w>-')
+set('n', '<leader>w', '<C-w>w')
+set('n', '<leader>h', '<C-w>h')
+set('n', '<leader>k', '<C-w>k')
+set('n', '<leader>j', '<C-w>j')
+set('n', '<leader>l', '<C-w>l')
 
-keymap.set('n', 'J', "mzJ`z")
+set('n', '<C-w><left>', '<C-w><')
+set('n', '<C-w><right>', '<C-w>>')
+set('n', '<C-w><up>', '<C-w>+')
+set('n', '<C-w><down>', '<C-w>-')
 
-keymap.set('n', '<C-d>', '<C-d>zz')
-keymap.set('n', '<C-u>', '<C-u>zz')
-keymap.set('n', 'n', 'nzzzv')
-keymap.set('n', 'N', 'Nzzzv')
+set('n', 'J', "mzJ`z")
 
-keymap.set("n", "<S-f>", vim.lsp.buf.format)
-keymap.set('n', '<C-z>', 'u')
+set('n', '<C-d>', '<C-d>zz')
+set('n', '<C-u>', '<C-u>zz')
+set('n', 'n', 'nzzzv')
+set('n', 'N', 'Nzzzv')
 
-keymap.set('v', '<TAB>', '>gv')
-keymap.set('v', '<S-TAB>', '<gv')
+set("n", "<S-f>", vim.lsp.buf.format)
+set('n', '<C-z>', 'u')
 
-keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+set('v', '<TAB>', '>gv')
+set('v', '<S-TAB>', '<gv')
 
-keymap.set('i', '<C-z>', '<Esc>u')
-keymap.set('i', '<C-c>', '<Esc>')
+set('v', 'J', ":m '>+1<CR>gv=gv")
+set('v', 'K', ":m '<-2<CR>gv=gv")
+
+set('i', '<C-z>', '<Esc>u')
+set('i', '<C-c>', '<Esc>')
