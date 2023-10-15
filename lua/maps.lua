@@ -1,12 +1,13 @@
 local set = vim.keymap.set
 
-set({ 'n', 'v', 'x' }, 'x', '"_x')
+set('n', 'x', '"_x')
+set('n', '<C-v>', '"+p')
 set({ 'n', 'v', 'x' }, 'd', '"_d')
+set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>')
 set({ 'n', 'v', 'x' }, '<Delete>', '"_d')
+set('i', '<kDel>', '<Delete>')
 set({ 'n', 'v', 'x' }, 'p', 'P')
 
-set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>') -- Key Pad Delete
-set('i', '<kDel>', '<Delete>')
 
 set('n', 'y', 'vy')
 set('n', '.', '<nop>')
@@ -21,13 +22,15 @@ set('n', 'H', '^')
 set('n', 'L', '$')
 
 set('n', 'te', ':tabedit<Return>')
-set('n', 'ss', ':vsplit<Return><C-w>w')
+set('n', 'sv', ':vsplit<Return><C-w>w')
+set('n', 'ss', ':split<cr><C-w>w')
 
 set('n', '<leader>w', '<C-w>w')
 set('n', '<leader>h', '<C-w>h')
 set('n', '<leader>k', '<C-w>k')
 set('n', '<leader>j', '<C-w>j')
 set('n', '<leader>l', '<C-w>l')
+
 
 set('n', '<C-w><left>', '<C-w><')
 set('n', '<C-w><right>', '<C-w>>')

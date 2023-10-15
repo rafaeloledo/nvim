@@ -1,51 +1,18 @@
 return {
-  {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      local status, nvim_tree = pcall(require, "nvim-tree")
-      if not status then
-        return
-      end
-
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
-      local function my_on_attach(bufnr)
-        local api = require "nvim-tree.api"
-
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings
-        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
-        vim.keymap.set('n', 'N', api.fs.create, opts('New File'))
-      end
-
-      nvim_tree.setup {
-        on_attach = my_on_attach,
-        renderer = {
-          group_empty = true,
-        },
-      }
-
-      vim.keymap.set('n', '<C-b>', function()
-        vim.cmd('NvimTreeToggle')
-      end)
-    end
-  },
+  { 'nvim-telescope/telescope-file-browser.nvim' },
   {
     'nvim-telescope/telescope.nvim',
     config = function()
       local status, telescope = pcall(require, "telescope")
-      if (not status) then
-        return
+      if (not status) then return end
+      local actions = require('telescope.actions')
+      local builtin = require("telescope.builtin")
+
+      local function telescope_buffer_dir()
+        return vim.fn.expand('%:p:h')
       end
 
-      local actions = require "telescope.actions"
+      local fb_actions = require "telescope".extensions.file_browser.actions
 
       telescope.setup {
         defaults = {
@@ -54,27 +21,101 @@ return {
             preview_width = 120,
             width = 200,
           },
-        }
+          mappings = {
+            n = {
+              ["q"] = actions.close
+            },
+          },
+        },
+        extensions = {
+          file_browser = {
+            hijack_netrw = true,
+            mappings = {
+              ["i"] = {
+                ["<C-w>"] = function() vim.cmd('normal vbd') end,
+              },
+              ["n"] = {
+                ["N"] = fb_actions.create,
+                ["h"] = fb_actions.goto_parent_dir,
+                ["/"] = function()
+                  vim.cmd('startinsert')
+                end,
+                ["<C-u>"] = function(prompt_bufnr)
+                  for i = 1, 10 do actions.move_selection_previous(prompt_bufnr) end
+                end,
+                ["<C-d>"] = function(prompt_bufnr)
+                  for i = 1, 10 do actions.move_selection_next(prompt_bufnr) end
+                end,
+                ["<PageUp>"] = actions.preview_scrolling_up,
+                ["<PageDown>"] = actions.preview_scrolling_down,
+              },
+            },
+          },
+        },
       }
 
-      local builtin = require("telescope.builtin")
+      telescope.load_extension("file_browser")
 
-      -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/mappings.lua
       local set = vim.keymap.set
 
-      set('n', '<leader>gs', '<cmd>Telescope git_status<CR>')
-      set('n', '<leader>gc', '<cmd>Telescope git_commits<CR>')
-      set('n', '<leader>km', function()
-        builtin.keymaps()
-      end)
-      set('n', ';f', builtin.find_files, {
+      set('n', '<leader>gs', ':Telescope git_status<cr>')
+      set('n', '<leader>gc', ':Telescope git_commits<cr>')
+      set('n', '<leader>gb', ':Telescope git_branches<cr>')
+      set('n', '<leader>km', ':Telescope keymaps<cr>')
 
-      })
+      set('n', ';f',
+        function()
+          builtin.find_files({
+            no_ignore = false,
+            hidden = true
+          })
+        end)
+      set('n', '<C-p>', function()
+        builtin.git_files({
+          no_ignore = false,
+          hidden = true,
+        })
+      end)
       set('n', ';r', function()
         builtin.live_grep()
       end)
-      set("n", "sf", builtin.git_files, {})
+      set('n', '\\\\', function()
+        builtin.buffers()
+      end)
+      set('n', ';t', function()
+        builtin.help_tags()
+      end)
+      set('n', ';;', function()
+        builtin.resume()
+      end)
+      set('n', ';e', function()
+        builtin.diagnostics()
+      end)
+      set("n", "sf", function()
+        telescope.extensions.file_browser.file_browser({
+          path = "%:p:h",
+          cwd = telescope_buffer_dir(),
+          respect_gitignore = false,
+          hidden = true,
+          grouped = true,
+          previewer = true,
+          initial_mode = "normal",
+          layout_config = { height = 55 }
+        })
+      end)
     end,
   },
   { 'nvim-lua/plenary.nvim' },
+  { 'folke/trouble.nvim' },
+  { 'lewis6991/gitsigns.nvim' },
+  {
+    'numToStr/Comment.nvim',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    config = {
+      toggler = {
+        line = 'gcc',
+        block = 'gbc',
+      }
+    },
+  },
 }

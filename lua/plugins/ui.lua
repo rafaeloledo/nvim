@@ -1,7 +1,18 @@
 return {
-  { 'norcalli/nvim-colorizer.lua' },
+  {
+    'norcalli/nvim-colorizer.lua',
+    config = function()
+      local status, colorizer = pcall(require, "colorizer")
+      if (not status) then return end
+
+      colorizer.setup({
+        '*',
+      })
+    end
+  },
   {
     'nvim-lualine/lualine.nvim',
+
     config = function()
       local status, lualine = pcall(require, "lualine")
       if (not status) then return end
@@ -15,8 +26,8 @@ return {
           disabled_filetypes = {}
         },
         sections = {
-          lualine_a = { 'mode' },   -- Mode
-          lualine_b = { 'branch' }, -- Branch
+          lualine_a = { 'mode' },   -- mode
+          lualine_b = { 'branch' }, -- branch
           lualine_c = { {
             'filename',
             file_status = true, -- displays file status (readonly status, modified status)
@@ -36,7 +47,7 @@ return {
             'filetype',
             'encoding',
           },
-          lualine_y = { 'progress' }, -- Progress
+          lualine_y = { 'progress' }, -- progress
           lualine_z = { 'location' }
         },
         inactive_sections = {
@@ -58,13 +69,14 @@ return {
   },
   {
     'nvim-tree/nvim-web-devicons',
+    lazy = true,
     config = function()
       local status, icons = pcall(require, "nvim-web-devicons")
       if (not status) then return end
 
       icons.setup {
         -- your personnal icons can go here (to override)
-        -- DevIcon will be appended to `name`
+        -- devicon will be appended to `name`
         override = {
         },
         -- globally enable default icons (default to false)
@@ -73,8 +85,6 @@ return {
       }
     end
   },
-  { 'lewis6991/gitsigns.nvim' },
-  { 'dinhhuy258/git.nvim' },
   {
     'akinsho/nvim-bufferline.lua',
     config = function()
@@ -112,8 +122,8 @@ return {
         },
       })
 
-      vim.keymap.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
-      vim.keymap.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
+      vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<cr>', {})
+      vim.keymap.set('n', '<S-tab>', '<cmd>BufferLineCyclePrev<cr>', {})
     end
   },
 }

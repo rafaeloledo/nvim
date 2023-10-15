@@ -5,6 +5,19 @@ return {
       local status, nvim_lsp = pcall(require, "lspconfig")
       if (not status) then return end
 
+      local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
+      local enable_format_on_save = function(_, bufnr)
+        vim.api.nvim_clear_autocmds({ group = augroup_format, buffer = bufnr })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          group = augroup_format,
+          buffer = bufnr,
+          callback = function()
+            vim.lsp.buf.format({ bufnr = bufnr })
+          end,
+        })
+      end
+
+
       local on_attach = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -25,7 +38,8 @@ return {
 
       nvim_lsp.tsserver.setup {
         on_attach = on_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact",
+          "javascript.tsx" },
         cmd = { "typescript-language-server", "--stdio" },
         capabilities = capabilities
       }
@@ -40,6 +54,7 @@ return {
         capabilities = capabilities,
         on_attach = function(client, bufnr)
           on_attach(client, bufnr)
+          enable_format_on_save(client, bufnr)
         end,
         settings = {
           Lua = {
@@ -96,11 +111,18 @@ return {
   },
   {
     'hrsh7th/nvim-cmp',
+    version = false,
+    event = "InsertEnter",
+    dependencies = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+    },
     config = function()
       local status, cmp = pcall(require, "cmp")
       if (not status) then return end
       local lspkind = require 'lspkind'
-      local luasnip = require("luasnip")
 
       local has_words_before = function()
         unpack = unpack or table.unpack
@@ -142,26 +164,15 @@ return {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true
           }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
+          ['<Tab>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+          }),
+          ['<S-Tab>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true
+          }),
+
         }),
         sources = cmp.config.sources({
           { name = 'nvim_lsp' },
@@ -184,14 +195,46 @@ return {
 ]]
     end
   },
-  { 'hrsh7th/cmp-buffer' },
-  { 'hrsh7th/cmp-path' },
-  { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/cmp-nvim-lua' },
-  { 'L3MON4D3/LuaSnip' },
-  { 'nvimdev/lspsaga.nvim' },
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      local status, saga = pcall(require, "lspsaga")
+      if (not status) then return end
+
+      saga.setup({
+        ui = {
+          border = 'rounded',
+        },
+        symbol_in_winbar = {
+          enable = false
+        },
+        lightbulb = {
+          enable = false
+        },
+        outline = {
+          layout = 'float'
+        }
+      })
+
+      local diagnostic = require("lspsaga.diagnostic")
+      local opts = { noremap = true, silent = true }
+      vim.keymap.set('n', '<C-j>', '<Cmd>Lspsaga diagnostic_jump_next<CR>', opts)
+      vim.keymap.set('n', 'gl', '<Cmd>Lspsaga show_line_diagnostics<CR>', opts)
+      vim.keymap.set('n', 'K', '<Cmd>Lspsaga hover_doc<CR>', opts)
+      vim.keymap.set('n', 'gd', '<Cmd>Lspsaga finder<CR>', opts)
+      vim.keymap.set('n', 'gt', '<Cmd>Lspsaga goto_type_definition<CR>', opts)
+      -- vim.keymap.set('i', '<C-k>', '<Cmd>Lspsaga signature_help<CR>', opts)
+      vim.keymap.set('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+      vim.keymap.set('n', 'gp', '<Cmd>Lspsaga peek_definition<CR>', opts)
+      vim.keymap.set('n', 'gr', '<Cmd>Lspsaga rename<CR>', opts)
+
+      -- code action
+      vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
+    end
+  },
   { 'dinhhuy258/git.nvim' },
-  { 'windwp/nvim-autopairs' },
+  { 'windwp/nvim-autopairs', event = "InsertEnter", opts = {} },
   { 'windwp/nvim-ts-autotag' },
   {
     'onsails/lspkind-nvim',
@@ -289,6 +332,7 @@ return {
   { 'williamboman/mason-lspconfig.nvim' },
   {
     'mfussenegger/nvim-jdtls',
+    lazy = true,
     config = function()
       local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
