@@ -2,6 +2,7 @@ local set = vim.keymap.set
 
 set('n', 'x', '"_x')
 set('n', '<C-v>', '"+p')
+set('n', 'y', '"+y')
 set({ 'n', 'v', 'x' }, 'd', '"_d')
 set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>')
 set({ 'n', 'v', 'x' }, '<Delete>', '"_d')
