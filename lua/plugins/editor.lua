@@ -65,13 +65,13 @@ return {
 
       set('n', ';f',
         function()
-          builtin.find_files({
+          builtin.git_files({
             no_ignore = false,
             hidden = true
           })
         end)
       set('n', '<C-p>', function()
-        builtin.git_files({
+        builtin.find_files({
           no_ignore = false,
           hidden = true,
         })
@@ -106,7 +106,6 @@ return {
     end,
   },
   { 'nvim-lua/plenary.nvim' },
-  { 'folke/trouble.nvim' },
   { 'lewis6991/gitsigns.nvim' },
   {
     'numToStr/Comment.nvim',

@@ -2,16 +2,14 @@ local set = vim.keymap.set
 
 set('n', 'x', '"_x')
 set('n', '<C-v>', '"+p')
-set('n', 'y', '"+y')
+set({ 'n', 'v' }, 'y', '"+y')
 set({ 'n', 'v', 'x' }, 'd', '"_d')
 set({ 'n', 'v', 'x' }, '<kDel>', '<Delete>')
 set({ 'n', 'v', 'x' }, '<Delete>', '"_d')
 set('i', '<kDel>', '<Delete>')
 set({ 'n', 'v', 'x' }, 'p', 'P')
 
-
 set('n', 'y', 'vy')
-set('n', '.', '<nop>')
 
 set('n', '+', '<C-a>')
 set('n', '-', '<C-x>')

@@ -25,13 +25,13 @@ opt.breakindent = true
 opt.shiftwidth = 2
 opt.tabstop = 2
 opt.wrap = false
-
 opt.cursorline = true
 opt.termguicolors = true
 opt.winblend = 0
 opt.wildoptions = 'pum'
 opt.pumblend = 5
 opt.background = 'dark'
+opt.relativenumber = true
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd [[
