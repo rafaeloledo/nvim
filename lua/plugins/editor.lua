@@ -16,11 +16,6 @@ return {
 
       telescope.setup {
         defaults = {
-          layout_config = {
-            height = 55,
-            preview_width = 120,
-            width = 200,
-          },
           mappings = {
             n = {
               ["q"] = actions.close
@@ -110,7 +105,7 @@ return {
   {
     'numToStr/Comment.nvim',
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
-    config = {
+    opts = {
       toggler = {
         line = 'gcc',
         block = 'gbc',
