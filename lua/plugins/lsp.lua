@@ -249,7 +249,8 @@ return {
     config = function()
       local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
-      local jar_path = '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+      local jar_path_linux = '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+      local jar_path_windows = 'C:\\Users\\rafae\\scoop\\apps\\jdtls\\current\\plugins\\org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
 
       local config = {
         cmd = {
@@ -263,7 +264,7 @@ return {
           '--add-modules=ALL-SYSTEM',
           '--add-opens', 'java.base/java.util=ALL-UNNAMED',
           '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-          '-jar', jar_path,
+          '-jar', jar_path_windows,
           '-configuration', '/usr/share/java/jdtls/config_linux',
           '-data', vim.fn.expand('~/.cache/jdtls-workspace') .. workspace_dir,
         },
