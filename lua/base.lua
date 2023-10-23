@@ -1,6 +1,8 @@
 local opt = vim.opt
 local api = vim.api
 
+vim.cmd('language en_US')
+
 vim.scriptencoding = 'utf-8'
 opt.encoding = 'utf-8'
 opt.fileencoding = 'utf-8'
@@ -54,7 +56,7 @@ vim.cmd([[let &t_Cs = "\e[4:3m"]])
 
 opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 opt.backspace = { 'start', 'eol', 'indent' }
---api.nvim_command('set fillchars=eob:\\ ')
+api.nvim_command('set fillchars=eob:\\ ')
 
 opt.path:append { '**' }
 opt.wildignore:append { '*/node_modules/*' }

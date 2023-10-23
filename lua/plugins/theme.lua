@@ -1,7 +1,8 @@
 return {
-  { 'tjdevries/colorbuddy.nvim' },
+  { 'tjdevries/colorbuddy.nvim', lazy = true },
   {
     'svrana/neosolarized.nvim',
+    lazy = true,
     config = function()
       local status, n = pcall(require, "neosolarized")
       if (not status) then return end
@@ -42,4 +43,7 @@ return {
       Group.new("HoverBorder", colors.yellow, colors.none, styles.NONE)
     end
   },
+  { 'EdenEast/nightfox.nvim', init = function ()
+    vim.cmd('colorscheme carbonfox')
+  end },
 }

@@ -1,5 +1,42 @@
 return {
-  { 'nvim-telescope/telescope-file-browser.nvim' },
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      local status, nvim_tree = pcall(require, "nvim-tree")
+      if not status then
+        return
+      end
+
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+
+      local function my_on_attach(bufnr)
+        local api = require "nvim-tree.api"
+
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+
+        -- custom mappings
+        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+        vim.keymap.set('n', 'N', api.fs.create, opts('New File'))
+      end
+
+      nvim_tree.setup {
+        on_attach = my_on_attach,
+        renderer = {
+          group_empty = true,
+        },
+      }
+
+      vim.keymap.set('n', '<C-b>', function()
+        vim.cmd('NvimTreeToggle')
+      end)
+    end
+  },
   {
     'nvim-telescope/telescope.nvim',
     config = function()
@@ -12,8 +49,6 @@ return {
         return vim.fn.expand('%:p:h')
       end
 
-      local fb_actions = require "telescope".extensions.file_browser.actions
-
       telescope.setup {
         defaults = {
           mappings = {
@@ -22,34 +57,7 @@ return {
             },
           },
         },
-        extensions = {
-          file_browser = {
-            hijack_netrw = true,
-            mappings = {
-              ["i"] = {
-                ["<C-w>"] = function() vim.cmd('normal vbd') end,
-              },
-              ["n"] = {
-                ["N"] = fb_actions.create,
-                ["h"] = fb_actions.goto_parent_dir,
-                ["/"] = function()
-                  vim.cmd('startinsert')
-                end,
-                ["<C-u>"] = function(prompt_bufnr)
-                  for i = 1, 10 do actions.move_selection_previous(prompt_bufnr) end
-                end,
-                ["<C-d>"] = function(prompt_bufnr)
-                  for i = 1, 10 do actions.move_selection_next(prompt_bufnr) end
-                end,
-                ["<PageUp>"] = actions.preview_scrolling_up,
-                ["<PageDown>"] = actions.preview_scrolling_down,
-              },
-            },
-          },
-        },
       }
-
-      telescope.load_extension("file_browser")
 
       local set = vim.keymap.set
 
@@ -85,18 +93,6 @@ return {
       end)
       set('n', ';e', function()
         builtin.diagnostics()
-      end)
-      set("n", "sf", function()
-        telescope.extensions.file_browser.file_browser({
-          path = "%:p:h",
-          cwd = telescope_buffer_dir(),
-          respect_gitignore = false,
-          hidden = true,
-          grouped = true,
-          previewer = true,
-          initial_mode = "normal",
-          layout_config = { height = 55 }
-        })
       end)
     end,
   },
