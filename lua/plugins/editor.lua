@@ -30,6 +30,10 @@ return {
         renderer = {
           group_empty = true,
         },
+        filters = {
+          dotfiles = false,
+          git_ignored = false,
+        }
       }
 
       vim.keymap.set('n', '<C-b>', function()
