@@ -22,19 +22,19 @@ return {
       delete_check_events = "TextChanged",
     },
     -- stylua: ignore
-    keys = {
-      {
-        "<tab>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true,
-        silent = true,
-        mode = "i",
-      },
-      { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-    },
+    -- keys = {
+    --   {
+    --     "<tab>",
+    --     function()
+    --       return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+    --     end,
+    --     expr = true,
+    --     silent = true,
+    --     mode = "i",
+    --   },
+    --   { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
+    --   { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+    -- },
   },
   {
     'hrsh7th/nvim-cmp',
@@ -66,6 +66,7 @@ return {
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
+          ["<Tab>"] = cmp.mapping.confirm(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
           ["<S-CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Replace,

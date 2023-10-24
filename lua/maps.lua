@@ -17,9 +17,6 @@ set('n', '-', '<C-x>')
 set('n', 'dw', 'vb"_d')
 set('n', '<C-a>', 'gg<S-v>G')
 
-set('n', 'H', '^')
-set('n', 'L', '$')
-
 set('n', 'te', ':tabedit<Return>')
 set('n', 'sv', ':vsplit<Return><C-w>w')
 set('n', 'ss', ':split<cr><C-w>w')

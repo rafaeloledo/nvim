@@ -44,8 +44,8 @@ return {
                 hint = ' '
               }
             },
-            'filetype',
             'encoding',
+            'filetype',
           },
           lualine_y = { 'progress' }, -- progress
           lualine_z = { 'location' }

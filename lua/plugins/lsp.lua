@@ -44,7 +44,10 @@ return {
         capabilities = capabilities
       }
 
-      nvim_lsp.clangd.setup {}
+      nvim_lsp.clangd.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
       nvim_lsp.jdtls.setup {}
 
@@ -147,7 +150,19 @@ return {
     end
   },
   { 'dinhhuy258/git.nvim' },
-  { 'windwp/nvim-autopairs', event = "InsertEnter", opts = {} },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {},
+    init = function()
+      local status, autopairs = pcall(require, "nvim-autopairs")
+      if (not status) then return end
+
+      autopairs.setup({
+        disable_filetype = { "TelescopePrompt", "vim" },
+      })
+    end
+  },
   { 'windwp/nvim-ts-autotag' },
   {
     'onsails/lspkind-nvim',
@@ -241,8 +256,26 @@ return {
       parser_config.tsx.filetype_to_parsername = { "javascript", "typescript.tsx" }
     end
   },
-  { 'williamboman/mason.nvim' },
-  { 'williamboman/mason-lspconfig.nvim' },
+  {
+    'williamboman/mason.nvim',
+    init = function()
+      local status, mason = pcall(require, "mason")
+      if (not status) then return end
+
+      mason.setup({ {} })
+    end
+  },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    init = function()
+      local status2, lspconfig = pcall(require, "mason-lspconfig")
+      if (not status2) then return end
+
+      lspconfig.setup {
+        -- automatic_installation = true
+      }
+    end
+  },
   {
     'mfussenegger/nvim-jdtls',
     lazy = true,
@@ -250,7 +283,8 @@ return {
       local workspace_dir = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 
       local jar_path_linux = '/usr/share/java/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
-      local jar_path_windows = 'C:\\Users\\rafae\\scoop\\apps\\jdtls\\current\\plugins\\org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
+      local jar_path_windows =
+      'C:\\Users\\rafae\\scoop\\apps\\jdtls\\current\\plugins\\org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar'
 
       local config = {
         cmd = {

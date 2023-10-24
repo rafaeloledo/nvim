@@ -33,7 +33,7 @@ opt.winblend = 0
 opt.wildoptions = 'pum'
 opt.pumblend = 5
 opt.background = 'dark'
-opt.relativenumber = true
+-- opt.relativenumber = true
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd [[
