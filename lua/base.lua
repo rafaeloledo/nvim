@@ -82,3 +82,6 @@ api.nvim_create_autocmd("BufEnter", {
 
 --opt.colorcolumn = "80"
 --opt.relativenumber = true
+--
+
+vim.cmd('set ffs=unix,dos')
