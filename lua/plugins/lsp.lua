@@ -149,7 +149,22 @@ return {
       vim.keymap.set({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
     end
   },
-  { 'dinhhuy258/git.nvim' },
+  {
+    'dinhhuy258/git.nvim',
+    config = function()
+      local status, git = pcall(require, "git")
+      if (not status) then return end
+
+      git.setup({
+        keymaps = {
+          -- Open blame window
+          blame = "<Leader>gb",
+          -- Open file/folder in git repository
+          browse = "<Leader>go",
+        }
+      })
+    end
+  },
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
@@ -163,7 +178,15 @@ return {
       })
     end
   },
-  { 'windwp/nvim-ts-autotag' },
+  {
+    'windwp/nvim-ts-autotag',
+    init = function()
+      local status, autotag = pcall(require, "nvim-ts-autotag")
+      if (not status) then return end
+
+      autotag.setup({})
+    end
+  },
   {
     'onsails/lspkind-nvim',
     config = function()
