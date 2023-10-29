@@ -43,7 +43,23 @@ return {
       Group.new("HoverBorder", colors.yellow, colors.none, styles.NONE)
     end
   },
-  { 'EdenEast/nightfox.nvim', init = function ()
-    vim.cmd('colorscheme carbonfox')
-  end },
+  {
+    'EdenEast/nightfox.nvim',
+    init = function()
+      -- vim.cmd('colorscheme nightfox')
+    end
+  },
+  {
+    "gmr458/dark_modern.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("dark_modern").setup({
+        cursorline = true,
+        transparent_background = false,
+        nvim_tree_darker = true,
+      })
+      vim.cmd.colorscheme("dark_modern")
+    end,
+  },
 }
