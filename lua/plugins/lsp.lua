@@ -34,7 +34,10 @@ return {
         capabilities = capabilities
       }
 
-      nvim_lsp.rust_analyzer.setup {}
+      nvim_lsp.rust_analyzer.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
       nvim_lsp.tsserver.setup {
         on_attach = on_attach,
@@ -49,9 +52,15 @@ return {
         capabilities = capabilities,
       }
 
-      nvim_lsp.jdtls.setup {}
+      nvim_lsp.jdtls.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
-      nvim_lsp.kotlin_language_server.setup {}
+      nvim_lsp.kotlin_language_server.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
       nvim_lsp.lua_ls.setup {
         capabilities = capabilities,
@@ -79,7 +88,10 @@ return {
         capabilities = capabilities
       }
 
-      nvim_lsp.pyright.setup {}
+      nvim_lsp.pyright.setup {
+        on_attach = on_attach,
+        capabilities = capabilities,
+      }
 
       nvim_lsp.astro.setup {
         on_attach = on_attach,
@@ -338,5 +350,18 @@ return {
       require('jdtls').start_or_attach(config)
     end
   },
-  { 'nvimtools/none-ls.nvim' },
+  {
+    'nvimtools/none-ls.nvim',
+    config = function()
+      local null_ls = require("null-ls")
+
+      null_ls.setup({
+        sources = {
+          null_ls.builtins.formatting.stylua,
+          null_ls.builtins.diagnostics.eslint,
+          null_ls.builtins.completion.spell,
+        },
+      })
+    end
+  },
 }
