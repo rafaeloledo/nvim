@@ -1,46 +1,5 @@
 return {
-  {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      local status, nvim_tree = pcall(require, "nvim-tree")
-      if not status then
-        return
-      end
-
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-
-      local function my_on_attach(bufnr)
-        local api = require "nvim-tree.api"
-
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
-
-        -- custom mappings
-        vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
-        vim.keymap.set('n', 'N', api.fs.create, opts('New File'))
-      end
-
-      nvim_tree.setup {
-        on_attach = my_on_attach,
-        renderer = {
-          group_empty = true,
-        },
-        filters = {
-          dotfiles = false,
-          git_ignored = false,
-        }
-      }
-
-      vim.keymap.set('n', '<C-b>', function()
-        vim.cmd('NvimTreeToggle')
-      end)
-    end
-  },
+  { 'nvim-telescope/telescope-file-browser.nvim' },
   {
     'nvim-telescope/telescope.nvim',
     config = function()
@@ -53,6 +12,8 @@ return {
         return vim.fn.expand('%:p:h')
       end
 
+      local fb_actions = require "telescope".extensions.file_browser.actions
+
       telescope.setup {
         defaults = {
           mappings = {
@@ -61,7 +22,38 @@ return {
             },
           },
         },
+        extensions = {
+          file_browser = {
+            theme = "dropdown",
+            -- disables netrw and use telescope-file-browser in its place
+            hijack_netrw = true,
+            mappings = {
+              -- your custom insert mode mappings
+              ["i"] = {
+                ["<C-w>"] = function() vim.cmd('normal vbd') end,
+              },
+              ["n"] = {
+                -- your custom normal mode mappings
+                ["N"] = fb_actions.create,
+                ["h"] = fb_actions.goto_parent_dir,
+                ["/"] = function()
+                  vim.cmd('startinsert')
+                end,
+                ["<C-u>"] = function(prompt_bufnr)
+                  for i = 1, 10 do actions.move_selection_previous(prompt_bufnr) end
+                end,
+                ["<C-d>"] = function(prompt_bufnr)
+                  for i = 1, 10 do actions.move_selection_next(prompt_bufnr) end
+                end,
+                ["<PageUp>"] = actions.preview_scrolling_up,
+                ["<PageDown>"] = actions.preview_scrolling_down,
+              },
+            },
+          },
+        },
       }
+
+      telescope.load_extension("file_browser")
 
       local set = vim.keymap.set
 
@@ -98,10 +90,30 @@ return {
       set('n', ';e', function()
         builtin.diagnostics()
       end)
+      set("n", "sf", function()
+        telescope.extensions.file_browser.file_browser({
+          path = "%:p:h",
+          cwd = telescope_buffer_dir(),
+          respect_gitignore = false,
+          hidden = true,
+          grouped = true,
+          previewer = false,
+          initial_mode = "normal",
+          layout_config = { height = 40 }
+        })
+      end)
     end,
   },
   { 'nvim-lua/plenary.nvim' },
-  { 'lewis6991/gitsigns.nvim' },
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      local status, gitsigns = pcall(require, "gitsigns")
+      if (not status) then return end
+
+      gitsigns.setup {}
+    end
+  },
   {
     'numToStr/Comment.nvim',
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
