@@ -1,14 +1,10 @@
 local opt = vim.opt
 local api = vim.api
-
-vim.cmd('language en_US')
-
-vim.scriptencoding = 'utf-8'
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
-
+vim.cmd("language en_US.utf8")
+vim.scriptencoding = "utf-8"
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
 vim.wo.number = true
-
 opt.title = true
 opt.autoindent = true
 opt.smartindent = true
@@ -20,7 +16,7 @@ opt.laststatus = 2
 opt.expandtab = true
 opt.scrolloff = 10
 -- opt.shell = 'fish'
-opt.inccommand = 'split'
+opt.inccommand = "split"
 opt.ignorecase = true
 opt.smarttab = true
 opt.breakindent = true
@@ -30,58 +26,45 @@ opt.wrap = false
 opt.cursorline = true
 opt.termguicolors = true
 opt.winblend = 0
-opt.wildoptions = 'pum'
+opt.wildoptions = "pum"
 opt.pumblend = 5
-opt.background = 'dark'
+opt.background = "dark"
 -- opt.relativenumber = true
-
 -- highlight yanked text for 200ms using the "Visual" highlight group
-vim.cmd [[
+vim.cmd([[
   augroup highlight_yank
   autocmd!
   au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=100})
   augroup END
-]]
-
+]])
 opt.incsearch = true
 opt.swapfile = false
 vim.wo.signcolumn = "yes"
-
 vim.g.mapleader = " "
-vim.o.showmode = true
+vim.o.showmode = 1
+vim.cmd("set ffs=unix,dos")
+vim.opt.clipboard:prepend({ "unnamed", "unnamedplus" }) -- Merge clipboards
 
 -- Undercurl
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
-
-opt.backupskip = { '/tmp/*', '/private/tmp/*' }
-opt.backspace = { 'start', 'eol', 'indent' }
-api.nvim_command('set fillchars=eob:\\ ')
-
-opt.path:append { '**' }
-opt.wildignore:append { '*/node_modules/*' }
-
-opt.formatoptions:append { 'r' }
-
+opt.backupskip = { "/tmp/*", "/private/tmp/*" }
+opt.backspace = { "start", "eol", "indent" }
+opt.path:append({ "**" })
+opt.wildignore:append({ "*/node_modules/*" })
+opt.formatoptions:append({ "r" })
 api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
-  command = "set nopaste"
+	pattern = "*",
+	command = "set nopaste",
 })
-
 api.nvim_create_autocmd("BufWritePost", {
-  command = ':silent! %s/\r/',
+	command = ":silent! %s/\r/",
 })
 api.nvim_create_autocmd("BufEnter", {
-  pattern = "*.inc",
-  command = ':set ft=asm'
+	pattern = "*.inc",
+	command = ":set ft=asm",
 })
 api.nvim_create_autocmd("BufEnter", {
-  pattern = { "*.rasi", "*.jsonc", "*.css" },
-  command = 'echo ""'
+	pattern = { "*.rasi", "*.jsonc", "*.css" },
+	command = 'echo ""',
 })
-
---opt.colorcolumn = "80"
---opt.relativenumber = true
---
-
-vim.cmd('set ffs=unix,dos')
