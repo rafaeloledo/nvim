@@ -66,11 +66,6 @@ return {
 				capabilities = capabilities,
 			})
 
-			nvim_lsp.kotlin_language_server.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
-
 			nvim_lsp.lua_ls.setup({
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
@@ -285,7 +280,6 @@ return {
 				ensure_installed = {
 					"markdown",
 					"markdown_inline",
-					"kotlin",
 					"tsx",
 					"javascript",
 					"typescript",
