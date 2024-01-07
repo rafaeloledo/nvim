@@ -3,8 +3,6 @@ local api = vim.api
 
 vim.g.mapleader = " "
 
-opt.guicursor = "i:block"
-
 vim.cmd("language en_US.utf8")
 vim.scriptencoding = "utf-8"
 opt.encoding = "utf-8"
