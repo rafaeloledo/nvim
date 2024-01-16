@@ -8,6 +8,8 @@ vim.scriptencoding = "utf-8"
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
+opt.guicursor = "i:block"
+
 vim.wo.number = true
 opt.title = true
 opt.autoindent = true
@@ -25,7 +27,7 @@ opt.smarttab = true
 opt.breakindent = true
 opt.shiftwidth = 2
 opt.tabstop = 2
--- opt.wrap = false
+opt.wrap = false
 opt.cursorline = true
 opt.termguicolors = true
 opt.winblend = 0

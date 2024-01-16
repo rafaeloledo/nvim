@@ -23,11 +23,6 @@ return {
 				local function buf_set_keymap(...)
 					vim.api.nvim_buf_set_keymap(bufnr, ...)
 				end
-
-				local opts = { noremap = true, silent = true }
-
-				buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-				buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
 			end
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -56,10 +51,10 @@ return {
 				capabilities = capabilities,
 			})
 
-			nvim_lsp.clangd.setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-			})
+			-- nvim_lsp.clangd.setup({
+			-- 	on_attach = on_attach,
+			-- 	capabilities = capabilities,
+			-- })
 
 			nvim_lsp.jdtls.setup({
 				on_attach = on_attach,
@@ -129,7 +124,7 @@ return {
 	},
 	{
 		"nvimdev/lspsaga.nvim",
-    enabled = false,
+		enabled = false,
 		config = function()
 			local status, saga = pcall(require, "lspsaga")
 			if not status then
@@ -190,7 +185,7 @@ return {
 	},
 	{
 		"windwp/nvim-autopairs",
-    enabled = false, -- I'm conversative about the necessity of autopairs
+		enabled = false, -- I'm conversative about the necessity of autopairs
 		event = "InsertEnter",
 		opts = {},
 		init = function()
@@ -285,10 +280,12 @@ return {
 					"tsx",
 					"javascript",
 					"typescript",
+					"cpp",
 					"toml",
 					"fish",
 					"php",
 					"json",
+					"cmake",
 					"yaml",
 					"java",
 					"swift",
