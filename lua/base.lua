@@ -8,7 +8,7 @@ vim.scriptencoding = "utf-8"
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 
-opt.guicursor = "i:block"
+-- opt.guicursor = "i:block"
 
 vim.wo.number = true
 opt.title = true
