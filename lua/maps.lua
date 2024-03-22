@@ -29,37 +29,48 @@ set("n", "<S-f>", vim.lsp.buf.format) -- Format
 set("n", "<C-b>", ":NvimTreeToggle<CR>")
 set("v", "K", ":m '<-2<CR>gv=gv")
 set("v", "J", ":m '>+1<CR>gv=gv")
+set("n", "<CR>", ":noh<cr>")
 
 set("n", "gd", function()
 	vim.lsp.buf.definition()
 end, opts)
+
 set("n", "K", function()
 	vim.lsp.buf.hover()
 end, opts)
+
 set("n", "]d", function()
 	vim.diagnostic.goto_next()
 end, opts)
+
 set("n", "[d", function()
 	vim.diagnostic.goto_previous()
 end, opts)
+
 set("n", "<leader>ca", function()
 	vim.lsp.buf.code_action()
 end, opts)
+
 set("n", "<leader>cA", function()
 	vim.lsp.buf.source_action()
 end, opts)
+
 set("n", "gr", function()
 	vim.lsp.buf.references()
 end, opts)
+
 set("n", "<leader>cr", function()
 	vim.lsp.buf.rename()
 end, opts)
+
 set("i", "<C-k>", function()
 	vim.lsp.buf.signature_help()
 end, opts)
+
 set("n", "gD", function()
 	vim.lsp.buf.declaration()
 end, opts)
+
 set("n", "gI", function()
 	vim.lsp.buf.implementation()
 end, opts)
